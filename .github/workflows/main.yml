@@ -18,7 +18,7 @@ on:
         description: Test scenario tags
 jobs:
   build:
-    runs-on: debian:bullseye-slim
+    runs-on: debian-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
