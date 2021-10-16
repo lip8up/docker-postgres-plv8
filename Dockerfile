@@ -1,4 +1,4 @@
-FROM postgres:15
+FROM postgres:13
 
 ENV PLV8_VERSION=3.0.0
 
