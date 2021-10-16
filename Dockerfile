@@ -18,8 +18,8 @@ RUN buildDependencies="build-essential \
   && runtimeDependencies="libc++1 \
     libtinfo5 \
     libc++abi1" \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends ${buildDependencies} ${runtimeDependencies} \
+  && apt update \
+  && apt install -y --no-install-recommends ${buildDependencies} ${runtimeDependencies} \
   && mkdir -p /tmp/build \
   && curl -o /tmp/build/v$PLV8_VERSION.tar.gz -SL "https://github.com/plv8/plv8/archive/v${PLV8_VERSION}.tar.gz" \
   && cd /tmp/build \
@@ -29,7 +29,7 @@ RUN buildDependencies="build-essential \
   && make install \
   && strip /usr/lib/postgresql/${PG_MAJOR}/lib/plv8-${PLV8_VERSION}.so \
   && rm -rf /root/.vpython_cipd_cache /root/.vpython-root \
-  && apt-get clean \
-  && apt-get remove -y ${buildDependencies} \
-  && apt-get autoremove -y \
+  && apt clean \
+  && apt remove -y ${buildDependencies} \
+  && apt autoremove -y \
   && rm -rf /tmp/build /var/lib/apt/lists/*
