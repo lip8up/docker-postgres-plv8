@@ -1,9 +1,6 @@
-FROM postgres:11
+FROM postgres:14
 
-MAINTAINER Chia-liang Kao <clkao@clkao.org>
-
-ENV PLV8_VERSION=2.3.13 \
-    PLV8_SHASUM="1a96c559d98ad757e7494bf7301f0e6b0dd2eec6066ad76ed36cc13fec4f2390"
+ENV PLV8_VERSION=3.0.0
 
 RUN buildDependencies="build-essential \
     ca-certificates \
@@ -16,14 +13,16 @@ RUN buildDependencies="build-essential \
     apt-transport-https \
     cmake \
     libc++-dev \
+    libc++abi-dev \
     postgresql-server-dev-$PG_MAJOR" \
-    runtimeDependencies="libc++1" \
+  && runtimeDependencies="libc++1 \
+    libtinfo5 \
+    libc++abi1" \
   && apt-get update \
   && apt-get install -y --no-install-recommends ${buildDependencies} ${runtimeDependencies} \
   && mkdir -p /tmp/build \
   && curl -o /tmp/build/v$PLV8_VERSION.tar.gz -SL "https://github.com/plv8/plv8/archive/v${PLV8_VERSION}.tar.gz" \
   && cd /tmp/build \
-  && echo $PLV8_SHASUM v$PLV8_VERSION.tar.gz | sha256sum -c \
   && tar -xzf /tmp/build/v$PLV8_VERSION.tar.gz -C /tmp/build/ \
   && cd /tmp/build/plv8-$PLV8_VERSION \
   && make static \
