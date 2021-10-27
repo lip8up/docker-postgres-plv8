@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf ./build",
+    "build": "yarn clean && esbuild ./src/*.ts --outdir=./build && :",
+    "watch": "esbuild ./src/*.ts --outdir=./build --watch",
+    "query": "node --es-module-specifier-resolution=node build/query.js",
+    "upsql": "prisma migrate dev --name init"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.3.0",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.2",
+    "log4js": "^6.3.0",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/node": "^16.11.1",
+    "esbuild": "^0.13.8",
+    "prisma": "^3.3.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
+  }
+}

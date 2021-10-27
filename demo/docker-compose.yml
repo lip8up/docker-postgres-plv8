@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  psql:
+    image: lip8up/postgres-plv8
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 111111
+      POSTGRES_DB: demo
+    volumes:
+      - ./.data:/var/lib/postgresql/data
+      - ./addplv8.sh:/docker-entrypoint-initdb.d/addplv8.sh
+    ports:
+      - 5432:5432
+
